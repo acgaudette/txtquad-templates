@@ -1,0 +1,27 @@
+#!/bin/sh
+
+TXTQUAD_ROOT_REL="./txtquad"
+TXTQUAD_ROOT_ABS=
+
+if test -z "$TXTQUAD_ROOT_ABS"
+	then TXTQUAD_ROOT=$TXTQUAD_ROOT_REL
+	else TXTQUAD_ROOT=$TXTQUAD_ROOT_ABS
+fi
+
+! test -d ./GLFW          && ln -s $TXTQUAD_ROOT/ext/include/GLFW  && echo ./GLFW/
+! test -f ./libtxtquad.so && ln -s $TXTQUAD_ROOT/bin/libtxtquad.so && echo ./libtxtquad.so
+! test -d ./acg && ln -s $TXTQUAD_ROOT/ext/include/acg && echo ./acg/
+! test -d ./alg && ln -s $TXTQUAD_ROOT/ext/include/alg && echo ./alg/
+
+if test -z "$TXTQUAD_ROOT_ABS"; then
+	TXTQUAD_ROOT_REL="../$TXTQUAD_ROOT_REL"
+	TXTQUAD_ROOT=$TXTQUAD_ROOT_REL
+fi
+
+! test -d ./assets && mkdir -p ./assets && echo ./assets/
+cd ./assets || exit 1
+
+! test -f ./font.pbm && ln -s $TXTQUAD_ROOT/assets/font.pbm && echo font.pbm
+! test -f ./vert.spv && ln -s $TXTQUAD_ROOT/assets/vert.spv && echo vert.spv
+
+echo done

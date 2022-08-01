@@ -1,0 +1,15 @@
+#!/bin/sh
+
+TITLE="jamxx"
+
+VERS="YYMMDD.VV"
+NAME="${TITLE}_${VERS}_lin"
+
+rm -fr $NAME $NAME.zip
+mkdir $NAME
+cp $TITLE ./$NAME
+
+mkdir $NAME/assets
+cp ./assets/* $NAME/assets
+cp ./libtxtquad.so ./$NAME
+zip -r "$NAME.zip" $NAME
